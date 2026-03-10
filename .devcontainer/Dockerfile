@@ -32,8 +32,6 @@ RUN apt-get update && apt-get install -y \
     libxcb-xtest0-dev \
     libxkbcommon-x11-dev \
     # Исходные пакеты (для полноты)
-    libncurses-dev \
-    check \
     valgrind \
     clang-format \
     iwyu \

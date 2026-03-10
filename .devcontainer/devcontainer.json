@@ -11,7 +11,10 @@
 	 "runArgs": [
         "--env=DISPLAY=${localEnv:DISPLAY}",
         "--env=QT_X11_NO_MITSHM=1",
-        "--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw"
+        "--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+		"--device=/dev/dri:/dev/dri",
+        "--group-add=44",
+        "--group-add=100"
     ],
     "remoteUser": "vscode",
 	"customizations": {
@@ -19,7 +22,10 @@
 			"extensions": [
 				"ms-vscode.cpptools",
 				"ms-vscode.cmake-tools",
-				"TheQtCompany.qt"
+				"theqtcompany.qt-core",
+				"theqtcompany.qt-cpp",
+				"theqtcompany.qt-qml",
+				"theqtcompany.qt-ui"
 			],
 			"settings": {
 				"cmake.configureOnOpen": false,
