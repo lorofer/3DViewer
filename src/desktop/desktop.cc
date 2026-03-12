@@ -6,17 +6,26 @@ s21::MainWin::MainWin() {
 
 	setCentralWidget(central_);
 
-	wf_model_ = new WireframeModelWidget(this);
+	scene_3d_widget_ = new Scene3DWidget(this);
 	model_manager_ = new ModelManager(this);
 
 	QHBoxLayout *container = new QHBoxLayout(central_);
-	container->addWidget(wf_model_, 2);
+	container->addWidget(scene_3d_widget_, 2);
 	container->addWidget(model_manager_, 1);
 }
 
 // --------------------
 
-s21::WireframeModelWidget::WireframeModelWidget(QWidget *parent) {}
+void s21::Scene3DWidget::initializeGL() {
+	vbo_.create();
+	vbo_.bind();
+	vbo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
+
+}
+
+void s21::Scene3DWidget::paintGL() {}
+
+void s21::Scene3DWidget::resizeGL(int w, int h) {}
 
 // --------------------
 
@@ -24,11 +33,14 @@ s21::ModelManager::ModelManager(QWidget *parent) : QWidget(parent) {
 	AddMoveSliders();
 	AddRotateSliders();
 	AddScaleSliders();
+	AddChooseFileButton();
 
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	layout->addWidget(move_sliders_);
 	layout->addWidget(rotate_sliders_);
 	layout->addWidget(scale_slider_);
+	layout->addStretch();
+	layout->addWidget(choose_file_btn_);
 }
 
 void s21::ModelManager::AddMoveSliders() {
@@ -88,6 +100,16 @@ void s21::ModelManager::AddScaleSliders() {
 	scale_slider_->AddSlider(scale);
 
 	scale_slider_->AddStretch();
+}
+
+void s21::ModelManager::AddChooseFileButton() {
+	choose_file_btn_ = new QPushButton("Выбрать файл");
+	choose_file_btn_->setMinimumHeight(40);
+	connect(choose_file_btn_, SIGNAL(clicked()), this, SLOT(ChooseFile()));
+}
+
+void s21::ModelManager::ChooseFile() {
+	QString file_path = QFileDialog::getOpenFileName(nullptr, "Выберите файл");
 }
 
 // --------------------

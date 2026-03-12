@@ -2,11 +2,23 @@
 #define MODEL_H
 
 #include <vector>
+#include <memory>
 
-class Vertex {
-	float x_, y_, z_;
+// struct Vertex {
+// 	float x, y, z;
+// };
+
+class Vertices {
 public:
-	Vertex(float x, float y, float z) noexcept : x_(x), y_(y), z_(z) {}
+	using VerticesVector = std::vector<float>;
+
+private:
+	std::shared_ptr<VerticesVector> vertices_ = std::make_shared<VerticesVector>();
+
+public:
+	void AddVertex(float x, float y, float z) noexcept;
+	std::shared_ptr<const VerticesVector> GetVertices() const noexcept;
+	int GetSize() const noexcept;
 };
 
 class Face {
@@ -16,11 +28,12 @@ public:
 };
 
 class Model {
-	std::vector<Vertex> vertices_;
-	std::vector<Face> faces_;
+	Vertices vertices_;
+	std::vector<Face> faces_ = {};
 
 public:
-	void AddVertex(Vertex v) noexcept;
+	void AddVertex(float x, float y, float z) noexcept;
+	std::shared_ptr<const Vertices::VerticesVector> GetVertices() const noexcept;
 	int GetNumOfVertices() const noexcept;
 
 	void AddFace(Face f) noexcept;

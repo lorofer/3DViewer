@@ -5,9 +5,10 @@
 
 #include <QtWidgets>
 #include <QOpenGLWidget>
+#include <QOpenGLBuffer>
 
 namespace s21 {
-class WireframeModelWidget;
+class Scene3DWidget;
 class ModelManager;
 class MoveSliders;
 class RotateSliders;
@@ -19,7 +20,7 @@ class MainWin : public QMainWindow {
 
 private:
 	QWidget *central_ = new QWidget();
-	WireframeModelWidget *wf_model_;
+	Scene3DWidget *scene_3d_widget_;
 	ModelManager *model_manager_;
 
 public:
@@ -27,11 +28,19 @@ public:
 
 };
 
-class WireframeModelWidget : public QOpenGLWidget {
+class Scene3DWidget : public QOpenGLWidget, public QOpenGLFunctions {
 	Q_OBJECT
 
+private:
+	QOpenGLBuffer vbo_;
+	QOpenGLBuffer ibo_;
+
 public:
-	WireframeModelWidget(QWidget *parent);
+	Scene3DWidget(QWidget *parent) : QOpenGLWidget(parent) {}
+
+	void initializeGL() override;
+	void paintGL() override;
+	void resizeGL(int w, int h) override;
 };
 
 class ModelManager : public QWidget {
@@ -41,10 +50,15 @@ private:
 	SlidersGroup *move_sliders_;
 	SlidersGroup *rotate_sliders_;
 	SlidersGroup *scale_slider_;
+	QPushButton *choose_file_btn_;
 
 	void AddMoveSliders();
 	void AddRotateSliders();
 	void AddScaleSliders();
+	void AddChooseFileButton();
+
+public slots:
+	void ChooseFile();
 
 public:
 	ModelManager(QWidget *parent);

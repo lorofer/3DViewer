@@ -17,12 +17,14 @@ void ObjParser::ParseObj(const std::string filename) noexcept {
 			std::getline(obj_file, skip);
 		}
 	}
+
+	
 }
 
 void ObjParser::VarticesParsing(std::ifstream& obj_file) noexcept {
 	float x, y, z;
 	obj_file >> x >> y >> z;
-	model_.AddVertex(Vertex(x, y, z));
+	model_.AddVertex(x, y, z);
 }
 
 void ObjParser::FacesParsing(std::ifstream& obj_file) noexcept {
