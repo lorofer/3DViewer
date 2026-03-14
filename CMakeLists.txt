@@ -8,16 +8,25 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # Исходники
-set(SOURCES_DIR src)
-set(SOURCES_FILES
-	${SOURCES_DIR}/main.cc
-	${SOURCES_DIR}/obj_parser.cc
-	${SOURCES_DIR}/model.cc
+set(SRC_DIR src)
+set(MAIN ${SRC_DIR}/main.cc)
+# Исходники model
+set(MODEL_DIR ${SRC_DIR}/model)
+set(MODEL_FILES
+	${MODEL_DIR}/obj_parser.cc
+	${MODEL_DIR}/model.cc
+	${MODEL_DIR}/model_facade.cc
 )
-# Desktop
-set(DESKTOP_DIR ${SOURCES_DIR}/desktop)
-set(DESKTOP_FILES
-	${DESKTOP_DIR}/desktop.cc
+# Исходники view
+set(VIEW_DIR ${SRC_DIR}/desktop)
+set(VIEW_FILES
+	${VIEW_DIR}/view.cc
+	${VIEW_DIR}/desktop.cc
+)
+# Исходники controller
+set(CONTROLLER_DIR ${SRC_DIR}/controller)
+set(CONTROLLER_FILES
+	${CONTROLLER_DIR}/controller.cc
 )
 
 
@@ -31,6 +40,7 @@ set(QT_LIBS
 	Qt6::Core
 	Qt6::Widgets
 	Qt6::OpenGLWidgets
+	OpenGL::GL
 )
 # Настройка Qt
 set(CMAKE_AUTOMOC ON)
@@ -38,19 +48,18 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 
-set(PARSER_TEST parser_test.out)
-add_executable(${PARSER_TEST}
-	${SOURCES_FILES}
+set(3D_VIEWER 3dviewer.out)
+add_executable(${3D_VIEWER}
+	${MODEL_FILES}
+	${VIEW_FILES}
+	${CONTROLLER_FILES}
+	${MAIN}
 )
-target_include_directories(${PARSER_TEST} PRIVATE
-	${SOURCES_DIR}
+target_include_directories(${3D_VIEWER} PRIVATE
+	${MODEL_DIR}
+	${VIEW_DIR}
+	${CONTROLLER_DIR}
 )
-
-
-set(DESKTOP_TARGET 3dviewer_desktop.out)
-add_executable(${DESKTOP_TARGET}
-	${DESKTOP_FILES}
-)
-target_link_libraries(${DESKTOP_TARGET} PRIVATE
+target_link_libraries(${3D_VIEWER} PRIVATE
 	${QT_LIBS}
 )

@@ -2,45 +2,57 @@
 #define DESKTOP_H
 
 #include <string>
+#include <memory>
 
 #include <QtWidgets>
 #include <QOpenGLWidget>
+#include <QMatrix4x4>
 #include <QOpenGLBuffer>
 
+#include "model.h"
+
 namespace s21 {
-class Scene3DWidget;
-class ModelManager;
 class MoveSliders;
 class RotateSliders;
 class SlidersGroup;
 class Slider;
 
-class MainWin : public QMainWindow {
+// class View : public QMainWindow {
+// 	Q_OBJECT
+//
+// private:
+// 	IController *controller_;
+// 	std::shared_ptr<const VertexBuffer::VerticesVector> vertex_buffer_;
+//
+// 	QWidget *central_;
+// 	Scene3DWidget *scene_3d_widget_;
+// 	ModelManager *model_manager_;
+//
+// public:
+// 	View(IController *c);
+// 	void OnModelLoaded();
+//
+// public slots:
+// 	void SetModelFromFile(const QString &file);
+// };
+
+class GLWidget : public QOpenGLWidget, public QOpenGLFunctions {
 	Q_OBJECT
 
 private:
-	QWidget *central_ = new QWidget();
-	Scene3DWidget *scene_3d_widget_;
-	ModelManager *model_manager_;
+	// QMatrix4x4 projection_matrix_;
+	// QOpenGLBuffer vbo_;
+	// QOpenGLBuffer ibo_;
+	std::shared_ptr<const VertexBuffer::VerticesVector> vertex_buffer_;
 
 public:
-	MainWin();
+	GLWidget(QWidget *parent) : QOpenGLWidget(parent) {}
 
-};
-
-class Scene3DWidget : public QOpenGLWidget, public QOpenGLFunctions {
-	Q_OBJECT
-
-private:
-	QOpenGLBuffer vbo_;
-	QOpenGLBuffer ibo_;
-
-public:
-	Scene3DWidget(QWidget *parent) : QOpenGLWidget(parent) {}
+	void UpdateModel(std::shared_ptr<const VertexBuffer::VerticesVector> vertex_buffer) noexcept;
 
 	void initializeGL() override;
 	void paintGL() override;
-	void resizeGL(int w, int h) override;
+	void resizeGL(int width, int height) override;
 };
 
 class ModelManager : public QWidget {
@@ -51,14 +63,16 @@ private:
 	SlidersGroup *rotate_sliders_;
 	SlidersGroup *scale_slider_;
 	QPushButton *choose_file_btn_;
+	QFileDialog *choose_file_dialog_;
 
 	void AddMoveSliders();
 	void AddRotateSliders();
 	void AddScaleSliders();
 	void AddChooseFileButton();
+	void AddChooseFileDialog();
 
 public slots:
-	void ChooseFile();
+	void OpenChooseFileDialog();
 
 public:
 	ModelManager(QWidget *parent);

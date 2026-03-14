@@ -3,7 +3,7 @@
 
 #include "obj_parser.h"
 
-void ObjParser::ParseObj(const std::string filename) noexcept {
+s21::Model s21::ObjParser::ParseObj(const std::string filename) noexcept {
 	std::ifstream obj_file(filename);
 
 	std::string prefix = "";
@@ -18,16 +18,16 @@ void ObjParser::ParseObj(const std::string filename) noexcept {
 		}
 	}
 
-	
+	return model_;
 }
 
-void ObjParser::VarticesParsing(std::ifstream& obj_file) noexcept {
+void s21::ObjParser::VarticesParsing(std::ifstream& obj_file) noexcept {
 	float x, y, z;
 	obj_file >> x >> y >> z;
 	model_.AddVertex(x, y, z);
 }
 
-void ObjParser::FacesParsing(std::ifstream& obj_file) noexcept {
+void s21::ObjParser::FacesParsing(std::ifstream& obj_file) noexcept {
 	std::string face_line = "";
 	std::getline(obj_file, face_line);
 
@@ -39,13 +39,13 @@ void ObjParser::FacesParsing(std::ifstream& obj_file) noexcept {
 	while (ss >> vertex_data) {
 		int index = GetVertexFromFaceLine(vertex_data);
 		index = IndexOfVerterToPositiveForm(index);
-		vertex_indexes.push_back(index);
+		vertex_indexes.push_back(index - 1);
 	}
 
-	model_.AddFace(Face(vertex_indexes));
+	model_.AddFace(s21::Face(vertex_indexes));
 }
 
-int ObjParser::GetVertexFromFaceLine(std::string& vertex_data) const noexcept {
+int s21::ObjParser::GetVertexFromFaceLine(std::string& vertex_data) const noexcept {
 	int vertex = -1;
 	int end_of_vertex = vertex_data.find_first_of("/");
 
@@ -55,7 +55,7 @@ int ObjParser::GetVertexFromFaceLine(std::string& vertex_data) const noexcept {
 	return vertex;
 }
 
-int ObjParser::IndexOfVerterToPositiveForm(int index) const noexcept {
+int s21::ObjParser::IndexOfVerterToPositiveForm(int index) const noexcept {
 	if (index < 0) {
 		return model_.GetNumOfVertices() + index + 1;
 	}

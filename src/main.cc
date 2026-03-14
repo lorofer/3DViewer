@@ -1,11 +1,11 @@
-#include "obj_parser.h"
+#include <QApplication>
 
-#include <iostream>
+#include "controller.h"
 
-int main() {
-	ObjParser p;
+int main(int argc, char *argv[]) {
+	QApplication app(argc, argv);
 
-	p.ParseObj("obj/cube.obj");
+	s21::Controller controller = {};
 
-	return 0;
+	return app.exec();
 }

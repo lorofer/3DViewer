@@ -4,16 +4,14 @@
 #include <vector>
 #include <memory>
 
-// struct Vertex {
-// 	float x, y, z;
-// };
-
-class Vertices {
+namespace s21 {
+class VertexBuffer {
 public:
 	using VerticesVector = std::vector<float>;
 
 private:
-	std::shared_ptr<VerticesVector> vertices_ = std::make_shared<VerticesVector>();
+	std::shared_ptr<VerticesVector> vertex_buffer_ = std::make_shared<VerticesVector>();
+	size_t size_ = 0;
 
 public:
 	void AddVertex(float x, float y, float z) noexcept;
@@ -28,15 +26,16 @@ public:
 };
 
 class Model {
-	Vertices vertices_;
+	VertexBuffer vertices_;
 	std::vector<Face> faces_ = {};
 
 public:
 	void AddVertex(float x, float y, float z) noexcept;
-	std::shared_ptr<const Vertices::VerticesVector> GetVertices() const noexcept;
+	std::shared_ptr<const VertexBuffer::VerticesVector> GetVertices() const noexcept;
 	int GetNumOfVertices() const noexcept;
 
 	void AddFace(Face f) noexcept;
 };
+}
 
 #endif

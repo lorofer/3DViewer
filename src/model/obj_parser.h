@@ -5,11 +5,12 @@
 
 #include "model.h"
 
+namespace s21 {
 class ObjParser {
 	Model model_;
 
 public:
-	void ParseObj(const std::string filename) noexcept;
+	Model ParseObj(const std::string filename) noexcept;
 
 private:
 	void VarticesParsing(std::ifstream& obj_file) noexcept;
@@ -18,5 +19,6 @@ private:
 	int GetVertexFromFaceLine(std::string& vertex_data) const noexcept;
 	int IndexOfVerterToPositiveForm(int index) const noexcept;
 };
+}
 
 #endif
