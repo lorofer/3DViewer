@@ -8,11 +8,13 @@ void s21::Controller::ShowView() {
 	view_.show();
 }
 
-void s21::Controller::SetModelFromFile(std::string file) noexcept {
-	model_facade_.SetModelFromFile(file);
+void s21::Controller::SetWireframeFromFile(std::string file) noexcept {
+	model_.SetWireframeFromFile(file);
 	view_.OnModelLoaded();
 }
 
-std::shared_ptr<const s21::VertexBuffer::VerticesVector> s21::Controller::GetVertices() const noexcept {
-	return model_facade_.GetVertices();
+std::vector<float> s21::Controller::GetVertexBuffer() const noexcept {
+	// vbo_ = model_.GetVertexBuffer();
+	// return vbo_;
+	return model_.GetVertexBuffer();
 }

@@ -3,7 +3,7 @@
 
 #include "obj_parser.h"
 
-s21::Model s21::ObjParser::ParseObj(const std::string filename) noexcept {
+s21::Wireframe s21::ObjParser::ParseObj(const std::string filename) noexcept {
 	std::ifstream obj_file(filename);
 
 	std::string prefix = "";
@@ -18,13 +18,13 @@ s21::Model s21::ObjParser::ParseObj(const std::string filename) noexcept {
 		}
 	}
 
-	return model_;
+	return wireframe_;
 }
 
 void s21::ObjParser::VarticesParsing(std::ifstream& obj_file) noexcept {
 	float x, y, z;
 	obj_file >> x >> y >> z;
-	model_.AddVertex(x, y, z);
+	wireframe_.AddVertex(x, y, z);
 }
 
 void s21::ObjParser::FacesParsing(std::ifstream& obj_file) noexcept {
@@ -42,7 +42,7 @@ void s21::ObjParser::FacesParsing(std::ifstream& obj_file) noexcept {
 		vertex_indexes.push_back(index - 1);
 	}
 
-	model_.AddFace(s21::Face(vertex_indexes));
+	wireframe_.AddFace(s21::Face(vertex_indexes));
 }
 
 int s21::ObjParser::GetVertexFromFaceLine(std::string& vertex_data) const noexcept {
@@ -57,7 +57,7 @@ int s21::ObjParser::GetVertexFromFaceLine(std::string& vertex_data) const noexce
 
 int s21::ObjParser::IndexOfVerterToPositiveForm(int index) const noexcept {
 	if (index < 0) {
-		return model_.GetNumOfVertices() + index + 1;
+		return wireframe_.GetNumOfVertices() + index + 1;
 	}
 	return index;
 }

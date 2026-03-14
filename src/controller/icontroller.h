@@ -4,14 +4,14 @@
 #include <string>
 #include <memory>
 
-#include "model.h"
+#include "wireframe.h"
 
 namespace s21 {
 class IController {
 public:
 	virtual ~IController() = default;
-	virtual void SetModelFromFile(std::string file) noexcept = 0;
-	virtual std::shared_ptr<const VertexBuffer::VerticesVector> GetVertices() const noexcept = 0;
+	virtual void SetWireframeFromFile(std::string file) noexcept = 0;
+	virtual std::vector<float> GetVertexBuffer() const noexcept = 0;
 };
 }
 

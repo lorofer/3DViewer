@@ -3,14 +3,14 @@
 
 #include <string>
 
-#include "model.h"
+#include "wireframe.h"
 
 namespace s21 {
 class ObjParser {
-	Model model_;
+	Wireframe wireframe_;
 
 public:
-	Model ParseObj(const std::string filename) noexcept;
+	Wireframe ParseObj(const std::string filename) noexcept;
 
 private:
 	void VarticesParsing(std::ifstream& obj_file) noexcept;

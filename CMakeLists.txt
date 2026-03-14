@@ -14,14 +14,15 @@ set(MAIN ${SRC_DIR}/main.cc)
 set(MODEL_DIR ${SRC_DIR}/model)
 set(MODEL_FILES
 	${MODEL_DIR}/obj_parser.cc
+	${MODEL_DIR}/wireframe.cc
 	${MODEL_DIR}/model.cc
-	${MODEL_DIR}/model_facade.cc
 )
 # Исходники view
 set(VIEW_DIR ${SRC_DIR}/desktop)
 set(VIEW_FILES
 	${VIEW_DIR}/view.cc
-	${VIEW_DIR}/desktop.cc
+	${VIEW_DIR}/wireframe_controller_widget.cc
+	${VIEW_DIR}/wireframe_widget.cc
 )
 # Исходники controller
 set(CONTROLLER_DIR ${SRC_DIR}/controller)
