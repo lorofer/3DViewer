@@ -14,7 +14,9 @@ void s21::Controller::SetWireframeFromFile(std::string file) noexcept {
 }
 
 std::vector<float> s21::Controller::GetVertexBuffer() const noexcept {
-	// vbo_ = model_.GetVertexBuffer();
-	// return vbo_;
 	return model_.GetVertexBuffer();
+}
+
+std::vector<int> s21::Controller::GetEdgesBuffer() const noexcept {
+	return model_.GetEdgesBuffer();
 }

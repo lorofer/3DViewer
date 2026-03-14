@@ -10,8 +10,6 @@ class Controller : public IController {
 	s21::Model model_ = {};
 	s21::View view_ = {this};
 
-	// std::vector<float> vbo_ = {};
-
 public:
 	Controller();
 
@@ -21,6 +19,7 @@ private:
 public:
 	void SetWireframeFromFile(std::string file) noexcept override;
 	std::vector<float> GetVertexBuffer() const noexcept override;
+	std::vector<int> GetEdgesBuffer() const noexcept override;
 };
 }
 

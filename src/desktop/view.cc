@@ -19,7 +19,5 @@ void s21::View::SetWireframeFromFile(const QString &file) {
 }
 
 void s21::View::OnModelLoaded() {
-	// vertex_buffer_ = controller_->GetVertexBuffer();
-	// qDebug() << "View: model loaded, vertices:" << (vertex_buffer_ ? vertex_buffer_->size() : 0);
-	wireframe_widget_->UpdateModel(controller_->GetVertexBuffer());
+	wireframe_widget_->UpdateModel(controller_->GetVertexBuffer(), controller_->GetEdgesBuffer());
 }

@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     # Qt6
     qt6-base-dev \
     libgl1-mesa-dev \
+    libglu1-mesa-dev \
     # Все XCB зависимости для Qt плагина xcb
     libxcb-cursor0 \
     libxcb-randr0-dev \

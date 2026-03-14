@@ -12,6 +12,7 @@ public:
 	virtual ~IController() = default;
 	virtual void SetWireframeFromFile(std::string file) noexcept = 0;
 	virtual std::vector<float> GetVertexBuffer() const noexcept = 0;
+	virtual std::vector<int> GetEdgesBuffer() const noexcept = 0;
 };
 }
 

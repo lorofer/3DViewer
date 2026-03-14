@@ -35,17 +35,30 @@ void s21::ObjParser::FacesParsing(std::ifstream& obj_file) noexcept {
 
 	std::stringstream ss(face_line);
 
+	bool is_first = true;
+	int first = -1;
+	int prev = -1;
+
 	std::string vertex_data = "";
 	while (ss >> vertex_data) {
-		int index = GetVertexFromFaceLine(vertex_data);
-		index = IndexOfVerterToPositiveForm(index);
-		vertex_indexes.push_back(index - 1);
+		int curr = GetIndexFromFaceLine(vertex_data);
+		curr = IndexOfVerterToPositiveForm(curr);
+		curr--;
+
+		if (is_first) {
+			first = prev = curr;
+			is_first = false;
+			continue;
+		}
+
+		wireframe_.AddEdge(prev, curr);
+		prev = curr;
 	}
 
-	wireframe_.AddFace(s21::Face(vertex_indexes));
+	wireframe_.AddEdge(prev, first);
 }
 
-int s21::ObjParser::GetVertexFromFaceLine(std::string& vertex_data) const noexcept {
+int s21::ObjParser::GetIndexFromFaceLine(std::string& vertex_data) const noexcept {
 	int vertex = -1;
 	int end_of_vertex = vertex_data.find_first_of("/");
 

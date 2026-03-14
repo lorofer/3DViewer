@@ -14,7 +14,7 @@ class Model {
 public:
 	void SetWireframeFromFile(std::string file) noexcept;
 	std::vector<float> GetVertexBuffer() const noexcept;
-	// std::shared_ptr<const VertexBuffer::VerticesVector> GetVertices() const noexcept;
+	std::vector<int> GetEdgesBuffer() const noexcept;
 };
 }
 

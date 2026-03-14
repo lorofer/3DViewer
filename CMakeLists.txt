@@ -31,17 +31,19 @@ set(CONTROLLER_FILES
 )
 
 
-# Qt libs
+# Qt & OpenGL libs
 find_package(Qt6 REQUIRED COMPONENTS
 	Core
 	Widgets
 	OpenGLWidgets
 )
+find_package(OpenGL REQUIRED COMPONENTS OpenGL)
 set(QT_LIBS
 	Qt6::Core
 	Qt6::Widgets
 	Qt6::OpenGLWidgets
 	OpenGL::GL
+	OpenGL::GLU
 )
 # Настройка Qt
 set(CMAKE_AUTOMOC ON)
