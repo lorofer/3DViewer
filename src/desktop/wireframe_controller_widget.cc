@@ -45,14 +45,17 @@ void s21::WireframeControllerWidget::AddRotateSliders() {
 	Slider *y = new Slider(rotate_sliders_, "Y");
 	Slider *z = new Slider(rotate_sliders_, "Z");
 
-	x->SetRange(-10, 10);
+	x->SetRange(-360, 360);
 	x->SetValue(0);
+	connect(x, SIGNAL(ValueChanged(int)), this, SIGNAL(RotateXChanged(int)));
 
-	y->SetRange(-10, 10);
+	y->SetRange(-360, 360);
 	y->SetValue(0);
+	connect(y, SIGNAL(ValueChanged(int)), this, SIGNAL(RotateYChanged(int)));
 
-	z->SetRange(-10, 10);
+	z->SetRange(-360, 360);
 	z->SetValue(0);
+	connect(z, SIGNAL(ValueChanged(int)), this, SIGNAL(RotateZChanged(int)));
 
 	rotate_sliders_->AddSlider(x);
 	rotate_sliders_->AddSlider(y);
@@ -116,6 +119,8 @@ s21::Slider::Slider(QWidget *parent, QString left_label, QString right_label) : 
 	sldr_layout->addWidget(left_label_);
 	sldr_layout->addWidget(slider_);
 	sldr_layout->addWidget(right_label_);
+
+	connect(slider_, SIGNAL(valueChanged(int)), this, SIGNAL(ValueChanged(int)));
 }
 
 void s21::Slider::SetRange(int min, int max) {

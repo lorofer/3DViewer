@@ -12,6 +12,8 @@ s21::View::View(IController *c) : controller_(c), vertex_buffer_({}), central_(n
 	QHBoxLayout *container = new QHBoxLayout(central_);
 	container->addWidget(wireframe_widget_, 2);
 	container->addWidget(model_manager_, 1);
+
+	ConnectSignals();
 }
 
 void s21::View::SetWireframeFromFile(const QString &file) {
@@ -20,4 +22,10 @@ void s21::View::SetWireframeFromFile(const QString &file) {
 
 void s21::View::OnModelLoaded() {
 	wireframe_widget_->UpdateModel(controller_->GetVertexBuffer(), controller_->GetEdgesBuffer());
+}
+
+void s21::View::ConnectSignals() {
+	connect(model_manager_, SIGNAL(RotateXChanged(int)), wireframe_widget_, SLOT(RotateX(int)));
+	connect(model_manager_, SIGNAL(RotateYChanged(int)), wireframe_widget_, SLOT(RotateY(int)));
+	connect(model_manager_, SIGNAL(RotateZChanged(int)), wireframe_widget_, SLOT(RotateZ(int)));
 }

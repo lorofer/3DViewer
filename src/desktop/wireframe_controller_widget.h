@@ -26,6 +26,11 @@ private:
 public slots:
 	void OpenChooseFileDialog();
 
+signals:
+	void RotateXChanged(int value);
+	void RotateYChanged(int value);
+	void RotateZChanged(int value);
+
 public:
 	WireframeControllerWidget(QWidget *parent);
 };
@@ -55,6 +60,9 @@ public:
 	Slider(QWidget *parent, QString left_label = "", QString right_label = "");
 	void SetRange(int min, int max);
 	void SetValue(int value);
+
+signals:
+    void ValueChanged(int value);
 };
 }
 

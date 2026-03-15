@@ -19,6 +19,8 @@ private:
 	WireframeWidget *wireframe_widget_;
 	WireframeControllerWidget *model_manager_;
 
+	void ConnectSignals();
+
 public:
 	View(IController *c);
 	void OnModelLoaded();
