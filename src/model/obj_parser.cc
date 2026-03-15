@@ -4,6 +4,8 @@
 #include "obj_parser.h"
 
 s21::Wireframe s21::ObjParser::ParseObj(const std::string filename) noexcept {
+	wireframe_.Clear();
+
 	std::ifstream obj_file(filename);
 
 	std::string prefix = "";

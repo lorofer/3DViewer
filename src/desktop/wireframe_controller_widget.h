@@ -23,16 +23,20 @@ private:
 	void AddChooseFileButton();
 	void AddChooseFileDialog();
 
+public:
+	WireframeControllerWidget(QWidget *parent);
+
 public slots:
 	void OpenChooseFileDialog();
 
 signals:
+	void MoveXChanged(int value);
+	void MoveYChanged(int value);
+	void MoveZChanged(int value);
+
 	void RotateXChanged(int value);
 	void RotateYChanged(int value);
 	void RotateZChanged(int value);
-
-public:
-	WireframeControllerWidget(QWidget *parent);
 };
 
 class SlidersGroup : public QWidget {

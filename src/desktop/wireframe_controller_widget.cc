@@ -24,12 +24,15 @@ void s21::WireframeControllerWidget::AddMoveSliders() {
 
 	x->SetRange(-10, 10);
 	x->SetValue(0);
+	connect(x, SIGNAL(ValueChanged(int)), this, SIGNAL(MoveXChanged(int)));
 
 	y->SetRange(-10, 10);
 	y->SetValue(0);
+	connect(y, SIGNAL(ValueChanged(int)), this, SIGNAL(MoveYChanged(int)));
 
 	z->SetRange(-10, 10);
 	z->SetValue(0);
+	connect(z, SIGNAL(ValueChanged(int)), this, SIGNAL(MoveZChanged(int)));
 
 	move_sliders_->AddSlider(x);
 	move_sliders_->AddSlider(y);

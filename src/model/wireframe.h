@@ -20,6 +20,8 @@ class Wireframe {
 	std::set<Edge> edges_ = {};
 
 public:
+	void Clear() noexcept;
+
 	void AddVertex(float x, float y, float z) noexcept;
 	int GetNumOfVertices() const noexcept;
 	std::vector<float> GetVertexBuffer() const noexcept;

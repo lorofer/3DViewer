@@ -36,6 +36,8 @@ void s21::WireframeWidget::paintGL() {
 
 	glTranslatef(0.0f, 0.0f, -5.0f);
 
+	glTranslatef(move_x_, move_y_, move_z_);
+
 	glRotatef(rotate_x_, 1.0f, 0.0f, 0.0f);
 	glRotatef(rotate_y_, 0.0f, 1.0f, 0.0f);
 	glRotatef(rotate_z_, 0.0f, 0.0f, 1.0f);
@@ -52,6 +54,21 @@ void s21::WireframeWidget::paintGL() {
 void s21::WireframeWidget::UpdateModel(std::vector<float> new_vbo, std::vector<int> new_ebo) noexcept {
 	vbo_data_ = std::move(new_vbo);
 	ebo_data_ = std::move(new_ebo);
+	update();
+}
+
+void s21::WireframeWidget::MoveX(int value) {
+	move_x_ = (float)value / 10.0f;
+	update();
+}
+
+void s21::WireframeWidget::MoveY(int value) {
+	move_y_ = (float)value / 10.0f;
+	update();
+}
+
+void s21::WireframeWidget::MoveZ(int value) {
+	move_z_ = (float)value / 10.0f;
 	update();
 }
 

@@ -17,6 +17,10 @@ private:
 	// QOpenGLBuffer vbo_ = {};
     // QOpenGLBuffer ebo_ = {};
 	// int index_count_ = 0;
+	float move_x_ = 0.0f;
+	float move_y_ = 0.0f;
+	float move_z_ = 0.0f;
+
 	float rotate_x_ = 0.0f;
 	float rotate_y_ = 0.0f;
 	float rotate_z_ = 0.0f;
@@ -31,6 +35,10 @@ public:
 	void UpdateModel(std::vector<float> new_vbo, std::vector<int> new_ebo) noexcept;
 
 public slots:
+	void MoveX(int value);
+	void MoveY(int value);
+	void MoveZ(int value);
+
 	void RotateX(int value);
 	void RotateY(int value);
 	void RotateZ(int value);

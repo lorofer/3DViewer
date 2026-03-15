@@ -25,6 +25,10 @@ void s21::View::OnModelLoaded() {
 }
 
 void s21::View::ConnectSignals() {
+	connect(model_manager_, SIGNAL(MoveXChanged(int)), wireframe_widget_, SLOT(MoveX(int)));
+	connect(model_manager_, SIGNAL(MoveYChanged(int)), wireframe_widget_, SLOT(MoveY(int)));
+	connect(model_manager_, SIGNAL(MoveZChanged(int)), wireframe_widget_, SLOT(MoveZ(int)));
+
 	connect(model_manager_, SIGNAL(RotateXChanged(int)), wireframe_widget_, SLOT(RotateX(int)));
 	connect(model_manager_, SIGNAL(RotateYChanged(int)), wireframe_widget_, SLOT(RotateY(int)));
 	connect(model_manager_, SIGNAL(RotateZChanged(int)), wireframe_widget_, SLOT(RotateZ(int)));

@@ -18,6 +18,11 @@ bool s21::Vertex::operator<(const Vertex& other) const noexcept {
 
 // --------------------
 
+void s21::Wireframe::Clear() noexcept {
+	vertices_.clear();
+	edges_.clear();
+}
+
 void s21::Wireframe::AddVertex(float x, float y, float z) noexcept {
 	vertices_.insert(Vertex{x, y, z});
 }
