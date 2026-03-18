@@ -81,13 +81,13 @@ void s21::WireframeControllerWidget::AddScaleSliders() {
 }
 
 void s21::WireframeControllerWidget::AddChooseFileButton() {
-	choose_file_btn_ = new QPushButton("Выбрать файл");
+	choose_file_btn_ = new QPushButton("Choose a model");
 	choose_file_btn_->setMinimumHeight(40);
 	connect(choose_file_btn_, SIGNAL(clicked()), this, SLOT(OpenChooseFileDialog()));
 }
 
 void s21::WireframeControllerWidget::AddChooseFileDialog() {
-	choose_file_dialog_ = new QFileDialog(this, "Выберите файл", "", "*.obj");
+	choose_file_dialog_ = new QFileDialog(this, "Choose a model", "", "*.obj");
 	choose_file_dialog_->setFileMode(QFileDialog::ExistingFile);
 	connect(choose_file_dialog_, SIGNAL(fileSelected(const QString&)), parent(), SLOT(SetWireframeFromFile(const QString&)));
 }

@@ -66,3 +66,51 @@ target_include_directories(${3D_VIEWER} PRIVATE
 target_link_libraries(${3D_VIEWER} PRIVATE
 	${QT_LIBS}
 )
+
+
+find_package(GTest REQUIRED)
+set(TESTS_LIBS
+    GTest::gtest
+    GTest::gtest_main
+)
+
+set(TESTS_TARGET tests.out)
+set(TESTS_DIR tests)
+set(TESTS_FILES
+	${TESTS_DIR}/model_tests.cc
+)
+add_executable(${TESTS_TARGET}
+	${TESTS_FILES}
+	${MODEL_FILES}
+)
+target_include_directories(${TESTS_TARGET} PRIVATE
+	${MODEL_DIR}
+)
+target_link_libraries(${TESTS_TARGET} PRIVATE
+    ${TESTS_LIBS}
+)
+
+
+# Цели из задания
+install(
+	TARGETS ${3D_VIEWER}
+	DESTINATION ${CMAKE_BINARY_DIR}
+)
+add_custom_target(
+	uninstall
+	COMMAND rm -f ${3D_VIEWER}
+)
+set_directory_properties(PROPERTIES
+    ADDITIONAL_CLEAN_FILES "${CMAKE_CURRENT_BINARY_DIR}/3DViewer_v2.0.tar.gz"
+)
+# add_custom_target(dvi)
+add_custom_target(
+	dist ALL
+	DEPENDS ${3D_VIEWER}
+	COMMAND tar -czvf 3DViewer_v2.0.tar.gz ${3D_VIEWER}
+)
+add_custom_target(
+	tests ALL
+	DEPENDS ${TESTS_TARGET}
+	# COMMAND ${TESTS_TARGET}
+)
