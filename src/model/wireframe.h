@@ -27,6 +27,7 @@ public:
 	std::vector<float> GetVertexBuffer() const noexcept;
 
 	void AddEdge(int a, int b) noexcept;
+	int GetNumOfEdges() const noexcept;
 	std::vector<int> GetEdgesBuffer() const noexcept;
 };
 }

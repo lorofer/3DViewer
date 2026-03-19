@@ -48,6 +48,10 @@ void s21::Wireframe::AddEdge(int a, int b) noexcept {
 	edges_.insert(Edge{a, b});
 }
 
+int s21::Wireframe::GetNumOfEdges() const noexcept {
+	return edges_.size();
+}
+
 std::vector<int> s21::Wireframe::GetEdgesBuffer() const noexcept {
 	std::vector<int> ebo = {};
 	ebo.reserve(edges_.size() * 2);

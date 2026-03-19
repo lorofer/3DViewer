@@ -20,8 +20,9 @@ void s21::View::SetWireframeFromFile(const QString &file) {
 	controller_->SetWireframeFromFile(file.toStdString());
 }
 
-void s21::View::OnModelLoaded() {
+void s21::View::OnModelLoaded(std::string filename) {
 	wireframe_widget_->UpdateModel(controller_->GetVertexBuffer(), controller_->GetEdgesBuffer());
+	model_manager_->UpdateWireframeInfo(filename, controller_->GetNumOfVertices(), controller_->GetNumOfEdges());
 }
 
 void s21::View::ConnectSignals() {

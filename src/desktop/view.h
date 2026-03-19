@@ -23,7 +23,7 @@ private:
 
 public:
 	View(IController *c);
-	void OnModelLoaded();
+	void OnModelLoaded(std::string filename);
 
 public slots:
 	void SetWireframeFromFile(const QString &file);

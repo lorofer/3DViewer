@@ -1,3 +1,5 @@
+#include <QFileInfo>
+
 #include "wireframe_controller_widget.h"
 
 s21::WireframeControllerWidget::WireframeControllerWidget(QWidget *parent) : QWidget(parent) {
@@ -7,12 +9,19 @@ s21::WireframeControllerWidget::WireframeControllerWidget(QWidget *parent) : QWi
 	AddChooseFileButton();
 	AddChooseFileDialog();
 
+	wifeframe_info_ = new WifeframeInfo(this);
+
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	layout->addWidget(move_sliders_);
 	layout->addWidget(rotate_sliders_);
 	layout->addWidget(scale_slider_);
 	layout->addStretch();
+	layout->addWidget(wifeframe_info_);
 	layout->addWidget(choose_file_btn_);
+}
+
+void s21::WireframeControllerWidget::UpdateWireframeInfo(std::string filename, int vertices_count, int edges_count) {
+	wifeframe_info_->UpdateWireframeInfo(filename, vertices_count, edges_count);
 }
 
 void s21::WireframeControllerWidget::AddMoveSliders() {
@@ -100,6 +109,11 @@ void s21::WireframeControllerWidget::OpenChooseFileDialog() {
 
 s21::SlidersGroup::SlidersGroup(QWidget *parent, QString label) : QWidget(parent) {
 	label_ = new QLabel(label);
+
+	QFont *font = new QFont();
+	font->setPointSize(11);
+	label_->setFont(*font);
+
 	layout_ = new QVBoxLayout(this);
 	layout_->addWidget(label_);
 }
@@ -118,6 +132,11 @@ s21::Slider::Slider(QWidget *parent, QString left_label, QString right_label) : 
 	left_label_->setText(left_label);
 	right_label_->setText(right_label);
 
+	QFont *font = new QFont();
+	font->setPointSize(11);
+	left_label_->setFont(*font);
+	right_label_->setFont(*font);
+
 	QHBoxLayout *sldr_layout = new QHBoxLayout(this);
 	sldr_layout->addWidget(left_label_);
 	sldr_layout->addWidget(slider_);
@@ -132,4 +151,35 @@ void s21::Slider::SetRange(int min, int max) {
 
 void s21::Slider::SetValue(int value) {
 	slider_->setValue(value);
+}
+
+// --------------------
+
+s21::WifeframeInfo::WifeframeInfo(QWidget *parent) : QWidget(parent) {
+	QVBoxLayout *wireframe_info_layout = new QVBoxLayout(this);
+
+	QHBoxLayout *filename_layout = new QHBoxLayout();
+	filename_layout->addWidget(filename_label_);
+	filename_layout->addWidget(filename_value_);
+
+	QHBoxLayout *vertices_layout = new QHBoxLayout();
+	vertices_layout->addWidget(vertices_label_);
+	vertices_layout->addWidget(vertices_value_);
+
+	QHBoxLayout *edges_layout = new QHBoxLayout();
+	edges_layout->addWidget(edges_label_);
+	edges_layout->addWidget(edges_value_);
+
+	wireframe_info_layout->addLayout(filename_layout);
+	wireframe_info_layout->addLayout(vertices_layout);
+	wireframe_info_layout->addLayout(edges_layout);
+}
+
+void s21::WifeframeInfo::UpdateWireframeInfo(std::string filename, int vertices_count, int edges_count) {
+	// QString qfilename = QString::fromStdString(filename);
+	QFileInfo file_info(QString::fromStdString(filename));
+
+	filename_value_->setText(file_info.fileName());
+	vertices_value_->setText(QString::number(vertices_count));
+	edges_value_->setText(QString::number(edges_count));
 }

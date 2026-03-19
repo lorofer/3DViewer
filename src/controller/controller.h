@@ -18,8 +18,12 @@ private:
 
 public:
 	void SetWireframeFromFile(std::string file) noexcept override;
+
 	std::vector<float> GetVertexBuffer() const noexcept override;
 	std::vector<int> GetEdgesBuffer() const noexcept override;
+
+	int GetNumOfVertices() const noexcept override;
+	int GetNumOfEdges() const noexcept override;
 };
 }
 

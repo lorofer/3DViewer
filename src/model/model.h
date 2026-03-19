@@ -13,8 +13,12 @@ class Model {
 
 public:
 	void SetWireframeFromFile(std::string file) noexcept;
+
 	std::vector<float> GetVertexBuffer() const noexcept;
+	int GetNumOfVertices() const noexcept;
+
 	std::vector<int> GetEdgesBuffer() const noexcept;
+	int GetNumOfEdges() const noexcept;
 };
 }
 
