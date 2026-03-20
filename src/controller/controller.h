@@ -7,24 +7,24 @@
 
 namespace s21 {
 class Controller : public IController {
-	s21::Model model_ = {};
-	s21::View view_ = {this};
+  s21::Model model_ = {};
+  s21::View view_ = {this};
 
-public:
-	Controller();
+ public:
+  Controller();
 
-private:
-	void ShowView();
+ private:
+  void ShowView();
 
-public:
-	void SetWireframeFromFile(std::string file) noexcept override;
+ public:
+  void SetWireframeFromFile(std::string file) noexcept override;
 
-	std::vector<float> GetVertexBuffer() const noexcept override;
-	std::vector<int> GetEdgesBuffer() const noexcept override;
+  std::vector<float> GetVertexBuffer() const noexcept override;
+  std::vector<int> GetEdgesBuffer() const noexcept override;
 
-	int GetNumOfVertices() const noexcept override;
-	int GetNumOfEdges() const noexcept override;
+  int GetNumOfVertices() const noexcept override;
+  int GetNumOfEdges() const noexcept override;
 };
-}
+}  // namespace s21
 
 #endif

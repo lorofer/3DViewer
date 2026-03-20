@@ -9,25 +9,25 @@
 
 namespace s21 {
 class View : public QMainWindow {
-	Q_OBJECT
+  Q_OBJECT
 
-private:
-	IController *controller_;
-	std::vector<float> vertex_buffer_;
+ private:
+  IController *controller_;
+  std::vector<float> vertex_buffer_;
 
-	QWidget *central_;
-	WireframeWidget *wireframe_widget_;
-	WireframeControllerWidget *model_manager_;
+  QWidget *central_;
+  WireframeWidget *wireframe_widget_;
+  WireframeControllerWidget *model_manager_;
 
-	void ConnectSignals();
+  void ConnectSignals();
 
-public:
-	View(IController *c);
-	void OnModelLoaded(std::string filename);
+ public:
+  View(IController *c);
+  void OnModelLoaded(std::string filename);
 
-public slots:
-	void SetWireframeFromFile(const QString &file);
+ public slots:
+  void SetWireframeFromFile(const QString &file);
 };
-}
+}  // namespace s21
 
 #endif

@@ -112,5 +112,25 @@ add_custom_target(
 add_custom_target(
 	tests ALL
 	DEPENDS ${TESTS_TARGET}
-	# COMMAND ${TESTS_TARGET}
+)
+
+
+file(GLOB_RECURSE ALL_FILES 
+    "${SRC_DIR}/*.cc" "${SRC_DIR}/*.h"
+    "${MODEL_DIR}/*.cc" "${MODEL_DIR}/*.h"
+    "${VIEW_DIR}/*.cc" "${VIEW_DIR}/*.h"
+    "${CONTROLLER_DIR}/*.cc" "${CONTROLLER_DIR}/*.h"
+)
+
+add_custom_target(
+	clang-format-apply
+	COMMAND cp ${CMAKE_CURRENT_LIST_DIR}/materials/linters/.clang-format ${CMAKE_CURRENT_LIST_DIR}
+	COMMAND clang-format -i ${ALL_FILES}
+	COMMAND rm -f ${CMAKE_CURRENT_LIST_DIR}/.clang-format
+)
+add_custom_target(
+	clang-format-check
+	COMMAND cp ${CMAKE_CURRENT_LIST_DIR}/materials/linters/.clang-format ${CMAKE_CURRENT_LIST_DIR}
+	COMMAND clang-format -n ${ALL_FILES}
+	COMMAND rm -f ${CMAKE_CURRENT_LIST_DIR}/.clang-format
 )
