@@ -36,6 +36,8 @@ void s21::WireframeWidget::paintGL() {
 
 	glTranslatef(0.0f, 0.0f, -5.0f);
 
+	glScalef(scale_, scale_, scale_);
+
 	glTranslatef(move_x_, move_y_, move_z_);
 
 	glRotatef(rotate_x_, 1.0f, 0.0f, 0.0f);
@@ -84,5 +86,11 @@ void s21::WireframeWidget::RotateY(int value) {
 
 void s21::WireframeWidget::RotateZ(int value) {
 	rotate_z_ = (float)value;
+	update();
+}
+
+void s21::WireframeWidget::ScaleChanged(int value) {
+	// float k = (float)value;
+	scale_ = (float)value / 10.0f;
 	update();
 }

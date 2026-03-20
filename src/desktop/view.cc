@@ -33,4 +33,6 @@ void s21::View::ConnectSignals() {
 	connect(model_manager_, SIGNAL(RotateXChanged(int)), wireframe_widget_, SLOT(RotateX(int)));
 	connect(model_manager_, SIGNAL(RotateYChanged(int)), wireframe_widget_, SLOT(RotateY(int)));
 	connect(model_manager_, SIGNAL(RotateZChanged(int)), wireframe_widget_, SLOT(RotateZ(int)));
+
+	connect(model_manager_, SIGNAL(ScaleChanged(int)), wireframe_widget_, SLOT(ScaleChanged(int)));
 }

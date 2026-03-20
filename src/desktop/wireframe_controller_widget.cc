@@ -81,8 +81,9 @@ void s21::WireframeControllerWidget::AddScaleSliders() {
 
 	Slider *scale = new Slider(scale_slider_, "-", "+");
 
-	scale->SetRange(-10, 10);
-	scale->SetValue(0);
+	scale->SetRange(1, 19);
+	scale->SetValue(10);
+	connect(scale, SIGNAL(ValueChanged(int)), this, SIGNAL(ScaleChanged(int)));
 
 	scale_slider_->AddSlider(scale);
 

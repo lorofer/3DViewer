@@ -40,6 +40,8 @@ signals:
 	void RotateXChanged(int value);
 	void RotateYChanged(int value);
 	void RotateZChanged(int value);
+
+	void ScaleChanged(int value);
 };
 
 class SlidersGroup : public QWidget {
