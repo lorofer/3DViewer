@@ -48,6 +48,7 @@ void s21::WireframeWidget::paintGL() {
   glVertexPointer(3, GL_FLOAT, 0, vbo_data_.data());
 
   glColor3f(0.5f, 0.5f, 1.0f);
+  glLineWidth(2.5f);
   glDrawElements(GL_LINES, ebo_data_.size(), GL_UNSIGNED_INT, ebo_data_.data());
 
   glDisableClientState(GL_VERTEX_ARRAY);
